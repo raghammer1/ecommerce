@@ -1,3 +1,3 @@
-# Ecommerce
-This will be a basic structure for an ecommerce website..
+# Sudoku Game
+This will be a sudoku game...
 
