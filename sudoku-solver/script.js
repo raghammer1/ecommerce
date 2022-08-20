@@ -206,30 +206,30 @@ function selectTile() {
   let hi = this;
   let r = parseInt(coords[0]);
   let c = parseInt(coords[1]);
-  document.addEventListener('keydown', function (e) {
-    // console.log(e.key);
-    if (e.key === '1') {
-      hi.innerText = '1';
-      return;
-    } else if (e.key === '2') {
-      hi.innerText = '2';
-      return;
-    } else if (e.key === '3') {
-      hi.innerText = '3';
-    } else if (e.key === '4') {
-      hi.innerText = '4';
-    } else if (e.key === '5') {
-      hi.innerText = '5';
-    } else if (e.key === '6') {
-      hi.innerText = '6';
-    } else if (e.key === '7') {
-      hi.innerText = '7';
-    } else if (e.key === '8') {
-      hi.innerText = '8';
-    } else if (e.key === '9') {
-      hi.innerText = '9';
-    }
-  });
+//   document.addEventListener('keydown', function (e) {
+//     // console.log(e.key);
+//     if (e.key === '1') {
+//       hi.innerText = '1';
+//       return;
+//     } else if (e.key === '2') {
+//       hi.innerText = '2';
+//       return;
+//     } else if (e.key === '3') {
+//       hi.innerText = '3';
+//     } else if (e.key === '4') {
+//       hi.innerText = '4';
+//     } else if (e.key === '5') {
+//       hi.innerText = '5';
+//     } else if (e.key === '6') {
+//       hi.innerText = '6';
+//     } else if (e.key === '7') {
+//       hi.innerText = '7';
+//     } else if (e.key === '8') {
+//       hi.innerText = '8';
+//     } else if (e.key === '9') {
+//       hi.innerText = '9';
+//     }
+//   });
   console.log(numSelected);
   if (numSelected.id == 10) {
     this.innerText = '';
