@@ -6828,10 +6828,29 @@ function selectTile() {
   } else if (solution[r][c] != numSelected.innerText) {
     document.getElementById('incorrect').classList.add('blink-bg');
     mistakes += 1;
+    console.log(mistakes);
     document.getElementById('incorrect').innerText = mistakes;
-    // if (mistakes > 6) {
-
-    // }
+    if (mistakes >= 5) {
+      for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+          id = i.toString() + '-' + j.toString();
+          if (board[i][j] == '-') {
+            if (solution[i][j] !== document.getElementById(id).innerText) {
+              document.body.classList.add('game-lost');
+              document.querySelector('.head').innerText = 'Game lost';
+              document.getElementById('submit').classList.add('hidden');
+              // document.getElementById('solve').classList.add('hidden');
+              // document.getElementById('reset').classList.add('hidden');
+              document.getElementById('restart').classList.remove('hidden');
+              document.getElementById('digits').innerHTML = '';
+              numSelected = null;
+              tileSelected = null;
+              return;
+            }
+          }
+        }
+      }
+    }
     setTimeout(function () {
       document.getElementById('incorrect').classList.remove('blink-bg');
     }, 1000);
