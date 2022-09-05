@@ -1,7 +1,7 @@
 # Sudoku Game
 This will be a sudoku game...
 
-To run this game please run the main.html in google chrome by first downloading the whole repo on you personal laptop,
+To run this game please run the main.html in your browser by first downloading the whole repo on you personal laptop,
 
 After that you will get two options one is a solver and other is play Game and this is how each of those work
 
