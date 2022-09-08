@@ -55,31 +55,54 @@ function setGame() {
   document.getElementById('reset').addEventListener('click', function () {
     reload = location.reload();
   });
+  document.getElementById('rules').addEventListener('click', function () {
+    openModal();
+  });
+  document.getElementById('close-btn').addEventListener('click', closeModal);
+  document.getElementById('over').addEventListener('click', closeModal);
+  document.addEventListener('keydown', function (e) {
+    if (
+      e.key === 'Escape' &&
+      !document.getElementById('mod').classList.contains('hidden')
+    ) {
+      closeModal();
+    }
+    if (
+      e.key === 'r' &&
+      document.getElementById('mod').classList.contains('hidden')
+    ) {
+      openModal();
+    } else if (
+      e.key === 'r' &&
+      !document.getElementById('mod').classList.contains('hidden')
+    ) {
+      closeModal();
+    }
+    if (e.key === 'h') {
+      hinted();
+    }
+  });
 }
 
+const closeModal = function () {
+  document.getElementById('mod').classList.add('hidden');
+  document.getElementById('over').classList.add('hidden');
+};
+
+const openModal = function () {
+  document.getElementById('mod').classList.remove('hidden');
+  document.getElementById('over').classList.remove('hidden');
+};
+
 function solve() {
-  // let sudoku = [[], [], [], [], [], [], [], [], []];
   let row = 9;
   let col = 9;
   var sudoku = new Array(row);
   for (var i = 0; i < sudoku.length; i++) {
     sudoku[i] = new Array(col);
   }
-
-  // i = 0;
-  // let j = 0;
   const childrens = document.getElementById('board').childNodes;
   for (let children of childrens) {
-    // if (i == 9) {
-    //   i = 0;
-    //   j++;
-    // // }
-    // if (children.innerText != '') {
-    //   console.log(parseInt(children.innerText));
-    // } else {
-    //   console.log(0);
-    // }
-    // i++;
     let coords = children.id.split('-');
     let r = parseInt(coords[0]);
     let c = parseInt(coords[1]);
@@ -88,57 +111,71 @@ function solve() {
     } else {
       sudoku[r][c] = 0;
     }
-    // if (children.innerText != '') {
-    //   children.classList.add('grey-back');
-    //   sudoku[j][i].push(parseInt(children.innerText));
-    //   i++;
-    // } else {
-    //   sudoku[j][i].push(0);
-    //   i++;
-    // }
   }
-
-  // console.log(sudoku);
   main(sudoku);
-  // console.log(sudoku);
-  // const childrens = document.getElementById('board').childNodes;
   for (let children of childrens) {
-    // if (i == 9) {
-    //   i = 0;
-    //   j++;
-    // // }
-    // if (children.innerText != '') {
-    //   console.log(parseInt(children.innerText));
-    // } else {
-    //   console.log(0);
-    // }
-    // i++;
     let coords = children.id.split('-');
     let r = parseInt(coords[0]);
     let c = parseInt(coords[1]);
-    // if (children.innerText != '') {
-    //   sudoku[r][c] = parseInt(children.innerText);
-    // } else {
-    //   sudoku[r][c] = 0;
-    // }
     children.innerText = sudoku[r][c];
   }
   document.getElementById('digits').innerHTML = '';
 }
 
 function main(sudoku) {
+  // checks if the sudoku given by the user is valid or not
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      if (sudoku[i][j] !== 0) {
+        for (let k = 0; k < 9; k++) {
+          if (sudoku[i][k] === sudoku[i][j]) {
+            if (k !== j) {
+              alert(
+                'Number are given in the same row hence it is not possible to solve this sudoku'
+              );
+              return sudoku;
+            }
+          } else if (sudoku[k][j] === sudoku[i][j]) {
+            if (k !== i) {
+              alert(
+                'Number are given in the same column hence it is not possible to solve this sudoku'
+              );
+              return sudoku;
+            }
+          }
+        }
+        let a = 3 * Math.floor(i / 3);
+        let a_sub = a + 3;
+
+        while (a < a_sub) {
+          let b = 3 * Math.floor(j / 3);
+          let b_sub = b + 3;
+          while (b < b_sub) {
+            console.log(a, b);
+            if (sudoku[a][b] === sudoku[i][j] && a !== i && b !== j) {
+              alert(
+                'Number are given in the same box hence it is not possible to solve this sudoku'
+              );
+              return sudoku;
+            }
+            b += 1;
+          }
+          a += 1;
+        }
+      }
+    }
+  }
+
+  // Now when verfied that the given sudoku is correct then we can start and try to find a possible solution for the given sudoku
   if (solver(sudoku, 0, 0)) {
-    // console.log('DONE');
     return sudoku;
-    // printed(sudoku, originalSudoku);
   } else {
-    console.log('NO possible solutions');
-    alert('NO POSSIBLE SOLUTION');
+    alert('NO POSSIBLE SOLUTION FOR THE GIVEN SUDOKU PATTERN');
   }
 }
 
 function solver(sudoku, row, col) {
-  if (row == 8 && col == 8) {
+  if (row == 8 && col == 9) {
     return true;
   }
   if (col === 9) {
@@ -149,7 +186,7 @@ function solver(sudoku, row, col) {
     return solver(sudoku, row, col + 1);
   }
   for (let num = 1; num < 10; num++) {
-    // console.log(checker(sudoku, row, col, num));
+    // console.log(num);
     if (checker(sudoku, row, col, num)) {
       sudoku[row][col] = num;
       if (solver(sudoku, row, col + 1)) {
@@ -170,7 +207,6 @@ function checker(sudoku, row, col, num) {
   }
   row = row - (row % 3);
   col = col - (col % 3);
-  // console.log(row, col);
   return boxChecker(sudoku, row, col, num);
 }
 
@@ -206,30 +242,6 @@ function selectTile() {
   let hi = this;
   let r = parseInt(coords[0]);
   let c = parseInt(coords[1]);
-//   document.addEventListener('keydown', function (e) {
-//     // console.log(e.key);
-//     if (e.key === '1') {
-//       hi.innerText = '1';
-//       return;
-//     } else if (e.key === '2') {
-//       hi.innerText = '2';
-//       return;
-//     } else if (e.key === '3') {
-//       hi.innerText = '3';
-//     } else if (e.key === '4') {
-//       hi.innerText = '4';
-//     } else if (e.key === '5') {
-//       hi.innerText = '5';
-//     } else if (e.key === '6') {
-//       hi.innerText = '6';
-//     } else if (e.key === '7') {
-//       hi.innerText = '7';
-//     } else if (e.key === '8') {
-//       hi.innerText = '8';
-//     } else if (e.key === '9') {
-//       hi.innerText = '9';
-//     }
-//   });
   console.log(numSelected);
   if (numSelected.id == 10) {
     this.innerText = '';
