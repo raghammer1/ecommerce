@@ -55,6 +55,7 @@ h1 {
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
+  background-color: rgba(255, 255, 255, 0.615);
 }
 
 #digits {
@@ -125,17 +126,17 @@ h1 {
   cursor: pointer;
 }
 
-.game-lost {
+.incorrect-sud {
   background-color: rgb(255, 0, 0, 0.9);
   transition: all 0.5s;
 }
 
-.game-won {
+.game-solved {
   background-color: rgb(8, 216, 8);
   transition: all 0.5s;
 }
 
-.game-solved-by-AI {
+.no-solution {
   background-color: yellow;
   transition: all 0.5s;
 }
