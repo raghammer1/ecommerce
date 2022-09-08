@@ -20,14 +20,9 @@ h1 {
   justify-content: center;
   align-items: center;
   margin-top: 10px;
-  /* font-weight: 400; */
 }
 
 .line {
-  /* width: 500px;
-  display: flex;
-  justify-self: center;
-  align-self: center; */
   margin: 0 auto;
   width: 500px;
   height: 2px;
@@ -35,8 +30,6 @@ h1 {
 
 .hint-btn {
   font-size: 20px;
-  /* margin-left: 20px; */
-  /* margin-right: 20px; */
   background-color: black;
   color: #fff;
   padding: 10px;
@@ -132,10 +125,6 @@ h1 {
   cursor: pointer;
 }
 
-/* button {
-  transition: all 0.5s;
-} */
-
 .game-lost {
   background-color: rgb(255, 0, 0, 0.9);
   transition: all 0.5s;
@@ -186,21 +175,23 @@ h1 {
 }
 
 .hidden {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .modal {
+  font: sans-serif;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 70%;
-
+  width: 60%;
   background-color: white;
   padding: 6rem;
   border-radius: 5px;
-  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.5);
   z-index: 10;
+  transition: all 0.5s;
 }
 
 .overlay {
@@ -223,4 +214,9 @@ h1 {
   cursor: pointer;
   border: none;
   background: none;
+  transition: all 0.5s;
+}
+
+.modal p {
+  margin-top: 25px;
 }
