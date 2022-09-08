@@ -82,6 +82,7 @@ function setGame() {
       hinted();
     }
   });
+  let headText = document.querySelector('.head');
 }
 
 const closeModal = function () {
@@ -127,50 +128,52 @@ function main(sudoku) {
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
       if (sudoku[i][j] !== 0) {
-        for (let k = 0; k < 9; k++) {
-          if (sudoku[i][k] === sudoku[i][j]) {
-            if (k !== j) {
-              alert(
-                'Number are given in the same row hence it is not possible to solve this sudoku'
-              );
-              return sudoku;
-            }
-          } else if (sudoku[k][j] === sudoku[i][j]) {
-            if (k !== i) {
-              alert(
-                'Number are given in the same column hence it is not possible to solve this sudoku'
-              );
-              return sudoku;
-            }
-          }
-        }
-        let a = 3 * Math.floor(i / 3);
-        let a_sub = a + 3;
-
-        while (a < a_sub) {
-          let b = 3 * Math.floor(j / 3);
-          let b_sub = b + 3;
-          while (b < b_sub) {
-            console.log(a, b);
-            if (sudoku[a][b] === sudoku[i][j] && a !== i && b !== j) {
-              alert(
-                'Number are given in the same box hence it is not possible to solve this sudoku'
-              );
-              return sudoku;
-            }
-            b += 1;
-          }
-          a += 1;
-        }
+        if (
+          initialRowColChecker(i, j, sudoku) == false ||
+          initialBoxChecker(i, j, sudoku) == false
+        )
+          return sudoku;
       }
     }
   }
 
   // Now when verfied that the given sudoku is correct then we can start and try to find a possible solution for the given sudoku
   if (solver(sudoku, 0, 0)) {
+    headText.innerHTML = 'Solved';
     return sudoku;
   } else {
-    alert('NO POSSIBLE SOLUTION FOR THE GIVEN SUDOKU PATTERN');
+    headText.innerHTML = 'No solution found';
+  }
+}
+
+function initialRowColChecker(i, j, sudoku) {
+  for (let k = 0; k < 9; k++) {
+    if (sudoku[i][k] === sudoku[i][j] && k !== j) {
+      headText.innerHTML = 'Incorrect sudoku provided';
+      return false;
+    } else if (sudoku[k][j] === sudoku[i][j] && k !== i) {
+      headText.innerHTML = 'Incorrect sudoku provided';
+      return false;
+    }
+  }
+}
+
+function initialBoxChecker(i, j, sudoku) {
+  let a = 3 * Math.floor(i / 3);
+  let a_sub = a + 3;
+
+  while (a < a_sub) {
+    let b = 3 * Math.floor(j / 3);
+    let b_sub = b + 3;
+    while (b < b_sub) {
+      console.log(a, b);
+      if (sudoku[a][b] === sudoku[i][j] && a !== i && b !== j) {
+        headText.innerHTML = 'Incorrect sudoku provided';
+        return false;
+      }
+      b += 1;
+    }
+    a += 1;
   }
 }
 
