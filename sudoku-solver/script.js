@@ -131,18 +131,26 @@ function main(sudoku) {
         if (
           initialRowColChecker(i, j, sudoku) == false ||
           initialBoxChecker(i, j, sudoku) == false
-        )
+        ) {
+          numSelected = null;
+          tileSelected = null;
           return sudoku;
+        }
       }
     }
   }
 
   // Now when verfied that the given sudoku is correct then we can start and try to find a possible solution for the given sudoku
   if (solver(sudoku, 0, 0)) {
+    numSelected = null;
+    tileSelected = null;
     headText.innerHTML = 'Solved';
     return sudoku;
   } else {
+    numSelected = null;
+    tileSelected = null;
     headText.innerHTML = 'No solution found';
+    return sudoku;
   }
 }
 
