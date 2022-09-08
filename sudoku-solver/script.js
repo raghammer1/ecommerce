@@ -83,6 +83,7 @@ function setGame() {
     }
   });
   let headText = document.querySelector('.head');
+  // let body = document.body;
 }
 
 const closeModal = function () {
@@ -132,8 +133,11 @@ function main(sudoku) {
           initialRowColChecker(i, j, sudoku) == false ||
           initialBoxChecker(i, j, sudoku) == false
         ) {
+          headText.style.color = 'white';
+          document.body.classList.add('incorrect-sud');
           numSelected = null;
           tileSelected = null;
+
           return sudoku;
         }
       }
@@ -144,11 +148,13 @@ function main(sudoku) {
   if (solver(sudoku, 0, 0)) {
     numSelected = null;
     tileSelected = null;
-    headText.innerHTML = 'Solved';
+    document.body.classList.add('game-solved');
+    headText.innerHTML = 'Solved 🎉';
     return sudoku;
   } else {
     numSelected = null;
     tileSelected = null;
+    document.body.classList.add('no-solution');
     headText.innerHTML = 'No solution found';
     return sudoku;
   }
