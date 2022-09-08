@@ -13,8 +13,8 @@ html {
 }
 
 header {
-  background-image: linear-gradient(rgb(0, 0, 0, 0.5), rgb(0, 0, 0, 0.6)),
-    url(sudoku-back-img.jpg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.125), rgba(0, 0, 0, 0.385)),
+    url(back-img.jpg);
   background-size: cover;
   height: 100vh;
 }
@@ -37,7 +37,7 @@ header {
   font-size: 30px;
   color: #333;
   text-decoration: none;
-  padding: 20px;
+  padding: 20px 150px;
   font-weight: 300;
   margin-bottom: 50px;
   letter-spacing: 0.5px;
