@@ -6659,7 +6659,6 @@ function setGame() {
             document.querySelector('.head').innerText = 'Game lost';
             document.getElementById('submit').classList.add('hidden');
             document.getElementById('solve').classList.add('hidden');
-            // document.getElementById('reset').classList.add('hidden');
             document.getElementById('restart').classList.remove('hidden');
             document.getElementById('digits').innerHTML = '';
             return;
@@ -6670,29 +6669,9 @@ function setGame() {
     document.body.classList.add('game-won');
     document.querySelector('.head').innerText = 'Game won';
     document.getElementById('submit').classList.add('hidden');
-    // document.getElementById('reset').classList.add('hidden');
     document.getElementById('solve').classList.add('hidden');
     document.getElementById('digits').innerHTML = '';
-    // document.getElementById('restart').classList.remove('hidden');
   });
-  // document.querySelector('.hint-btn').addEventListener('click', function () {
-  //   if (hint === 0) {
-  //     return;
-  //   }
-  //   const childrens = document.getElementById('board').childNodes;
-  //   for (children of childrens) {
-  //     let coords = children.id.split('-');
-  //     let r = parseInt(coords[0]);
-  //     let c = parseInt(coords[1]);
-  //     if (children.innerText == '' || children.innerText !== solution[r][c]) {
-  //       children.innerText = solution[r][c];
-  //       hint -= 1;
-  //       document.getElementById('hints').innerText = hint;
-  //       break;
-  //     }
-  //   }
-  //   return;
-  // });
   document.querySelector('.hint-btn').addEventListener('click', function () {
     hinted();
   });
@@ -6707,7 +6686,6 @@ function setGame() {
     document.body.classList.add('game-solved-by-AI');
     document.querySelector('.head').innerText = 'Try again';
     document.getElementById('submit').classList.add('hidden');
-    // document.getElementById('reset').classList.add('hidden');
     document.getElementById('solve').classList.add('hidden');
     document.getElementById('digits').innerHTML = '';
     document.getElementById('restart').classList.remove('hidden');
@@ -6727,13 +6705,10 @@ function setGame() {
     if (document.body.classList.contains('game-solved-by-AI')) {
       document.body.classList.remove('game-solved-by-AI');
       document.getElementById('submit').classList.remove('hidden');
-      // document.getElementById('reset').classList.remove('hidden');
       document.getElementById('solve').classList.remove('hidden');
-      // document.getElementById('restart').classList.add('hidden');
     } else if (document.body.classList.contains('game-lost')) {
       document.body.classList.remove('game-lost');
       document.getElementById('submit').classList.remove('hidden');
-      // document.getElementById('reset').classList.remove('hidden');
       document.getElementById('solve').classList.remove('hidden');
     } else if (document.body.classList.contains('game-won')) {
       document.body.classList.remove('game-won');
@@ -6748,7 +6723,6 @@ function setGame() {
   document.getElementById('close-btn').addEventListener('click', closeModal);
   document.getElementById('over').addEventListener('click', closeModal);
   document.addEventListener('keydown', function (e) {
-    // console.log(e.key);
     if (
       e.key === 'Escape' &&
       !document.getElementById('mod').classList.contains('hidden')
@@ -6839,8 +6813,6 @@ function selectTile() {
               document.body.classList.add('game-lost');
               document.querySelector('.head').innerText = 'Game lost';
               document.getElementById('submit').classList.add('hidden');
-              // document.getElementById('solve').classList.add('hidden');
-              // document.getElementById('reset').classList.add('hidden');
               document.getElementById('restart').classList.remove('hidden');
               document.getElementById('digits').innerHTML = '';
               numSelected = null;
