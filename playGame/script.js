@@ -6615,8 +6615,6 @@ let gameNum = Math.floor(Math.random() * boardArr.length);
 let board = boardArr[gameNum];
 let solution = solutionArr[gameNum];
 
-console.log(solution);
-
 var newGame = function () {
   setGame();
 };
@@ -6661,6 +6659,10 @@ function setGame() {
             document.getElementById('solve').classList.add('hidden');
             document.getElementById('restart').classList.remove('hidden');
             document.getElementById('digits').innerHTML = '';
+            numSelected = null;
+            tileSelected = null;
+            document.querySelector('.hint-btn').classList.add('hidden');
+            document.querySelector('#hints').classList.add('hidden');
             return;
           }
         }
@@ -6689,8 +6691,12 @@ function setGame() {
     document.getElementById('solve').classList.add('hidden');
     document.getElementById('digits').innerHTML = '';
     document.getElementById('restart').classList.remove('hidden');
+    numSelected = null;
+    tileSelected = null;
   });
   document.getElementById('restart').addEventListener('click', function () {
+    numSelected = null;
+    tileSelected = null;
     reload = location.reload();
   });
   document.getElementById('reset').addEventListener('click', function () {
@@ -6701,7 +6707,10 @@ function setGame() {
     hint = 1;
     document.getElementById('hints').innerText = hint;
     document.querySelector('.head').innerText = 'Game Reset';
-
+    if (document.querySelector('.hint-btn').classList.contains('hidden')) {
+      document.querySelector('.hint-btn').classList.remove('hidden');
+      document.querySelector('#hints').classList.remove('hidden');
+    }
     if (document.body.classList.contains('game-solved-by-AI')) {
       document.body.classList.remove('game-solved-by-AI');
       document.getElementById('submit').classList.remove('hidden');
@@ -6715,6 +6724,8 @@ function setGame() {
       document.getElementById('submit').classList.remove('hidden');
       document.getElementById('solve').classList.remove('hidden');
     }
+    numSelected = null;
+    tileSelected = null;
     newGame();
   });
   document.getElementById('rules').addEventListener('click', function () {
@@ -6802,7 +6813,6 @@ function selectTile() {
   } else if (solution[r][c] != numSelected.innerText) {
     document.getElementById('incorrect').classList.add('blink-bg');
     mistakes += 1;
-    console.log(mistakes);
     document.getElementById('incorrect').innerText = mistakes;
     if (mistakes >= 5) {
       for (let i = 0; i < 9; i++) {
@@ -6831,8 +6841,6 @@ function selectTile() {
   }
   if (solution[r][c] != numSelected.innerText && this.innerText == '') {
     this.innerText = numSelected.innerText;
-    console.log('herr');
-    console.log(this);
     let hi = this;
     this.classList.add('game-lost');
     setTimeout(function () {
